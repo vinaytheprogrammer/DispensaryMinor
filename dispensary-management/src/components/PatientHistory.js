@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
+import { useNavigate, Link } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 
 const PatientHistory = () => {
@@ -72,8 +73,18 @@ const PatientHistory = () => {
 
   return (
     <div className="min-h-screen p-8 bg-gray-100">
+      
       <div className="container mx-auto bg-white p-8 rounded-lg shadow-lg">
+
+      <Link
+  to="/appointment"
+  className=" top-4 left-4 bg-gray-200 hover:bg-gray-300 text-black py-2 px-4 rounded-lg"
+>
+  Back
+</Link>
+
         <h2 className="text-3xl font-bold mb-6 text-center">Patient History</h2>
+        
 
         {/* Search input */}
         <input
@@ -144,7 +155,8 @@ const PatientHistory = () => {
           <p>No patient history found.</p>
         )}
       </div>
-
+      
+   
       {/* Toast notifications container */}
       <ToastContainer />
     </div>

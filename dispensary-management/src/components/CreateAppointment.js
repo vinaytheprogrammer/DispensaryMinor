@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';  // Ensure this is imported
+import 'react-toastify/dist/ReactToastify.css';
 
 const CreateAppointment = ({ sendToDoctor }) => {
   const [patientDetails, setPatientDetails] = useState({
@@ -35,6 +35,12 @@ const CreateAppointment = ({ sendToDoctor }) => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl">
+      <Link
+  to="/appointment"
+  className=" top-4 left-4 bg-gray-200 hover:bg-gray-300 text-black py-2 px-4 rounded-lg"
+>
+  Back
+</Link>
         <h2 className="text-2xl font-bold mb-6 text-center">New Appointment</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* Patient Basic Details */}
@@ -53,7 +59,7 @@ const CreateAppointment = ({ sendToDoctor }) => {
         <textarea name="history" placeholder="Medical History" value={patientDetails.history} onChange={handleChange} className="w-full mt-4 px-4 py-2 border rounded-lg"></textarea>
         <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200 mt-6">Send to Doctor</button>
       </form>
-
+      
       {/* Add the ToastContainer here */}
       <ToastContainer />
     </div>

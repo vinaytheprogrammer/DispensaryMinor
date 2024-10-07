@@ -15,3 +15,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Example using Tailwind */
+.navigation-buttons {
+  @apply flex justify-between items-center py-4;
+}
+
+.navigation-buttons button {
+  @apply bg-gray-200 text-black py-2 px-4 rounded-lg;
+}
+
+.navigation-buttons a {
+  @apply bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg;
+}
+
+.navigation-buttons button:disabled {
+  @apply cursor-not-allowed opacity-50;
+}
