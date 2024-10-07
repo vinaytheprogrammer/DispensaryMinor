@@ -15,12 +15,14 @@ const Appointment = () => {
     toast.success('Patient history fetched successfully!');
     navigate('/patienthistory');
   };
+
   const handleAi = () => {
     toast.success('Take AI Assistance!');
     navigate('/ai');
   };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex flex-col items-center justify-start bg-gray-100 pt-16"> {/* Added pt-16 to create space below header */}
       <div className="bg-white p-8 rounded-lg shadow-lg w-96 text-center">
         <h2 className="text-2xl font-bold mb-6">Welcome to Dispensary</h2>
         <button

@@ -3,6 +3,7 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import { useNavigate, Link } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
+import './PatientHistory.css'; // Add custom styles
 
 const PatientHistory = () => {
   const [appointments, setAppointments] = useState([]);
@@ -10,9 +11,8 @@ const PatientHistory = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [expandedRows, setExpandedRows] = useState({}); // To manage "hide/show" functionality
+  const [expandedRows, setExpandedRows] = useState({});
 
-  // Fetch all patient appointment details from API
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
@@ -35,7 +35,6 @@ const PatientHistory = () => {
     fetchAppointments();
   }, []);
 
-  // Handle search input change
   const handleSearchChange = (e) => {
     const searchValue = e.target.value.toLowerCase();
     setSearchTerm(searchValue);
@@ -47,7 +46,6 @@ const PatientHistory = () => {
     setFilteredAppointments(filtered);
   };
 
-  // Toggle expanded state for rows (hide/show functionality)
   const toggleRowVisibility = (index) => {
     setExpandedRows((prevExpandedRows) => ({
       ...prevExpandedRows,
@@ -72,19 +70,16 @@ const PatientHistory = () => {
   }
 
   return (
-    <div className="min-h-screen p-8 bg-gray-100">
-      
-      <div className="container mx-auto bg-white p-8 rounded-lg shadow-lg">
+    <div className="min-h-screen p-4 sm:p-8 bg-gray-100">
+      <div className="container mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-lg">
+        <Link
+          to="/appointment"
+          className="block mb-4 bg-gray-200 hover:bg-gray-300 text-black py-2 px-4 rounded-lg w-fit"
+        >
+          Back
+        </Link>
 
-      <Link
-  to="/appointment"
-  className=" top-4 left-4 bg-gray-200 hover:bg-gray-300 text-black py-2 px-4 rounded-lg"
->
-  Back
-</Link>
-
-        <h2 className="text-3xl font-bold mb-6 text-center">Patient History</h2>
-        
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center">Patient History</h2>
 
         {/* Search input */}
         <input
@@ -96,67 +91,44 @@ const PatientHistory = () => {
         />
 
         {filteredAppointments.length > 0 ? (
-          <div className="overflow-x-auto">
-            <table className="w-full table-auto border-collapse">
-              <thead>
-                <tr className="bg-gray-200 text-left">
-                  <th className="py-2 px-4 border">Patient Name</th>
-                  <th className="py-2 px-4 border">Age</th>
-                  <th className="py-2 px-4 border">Phone</th>
-                  <th className="py-2 px-4 border">Weight</th>
-                  <th className="py-2 px-4 border">Height</th>
-                  <th className="py-2 px-4 border">BP</th>
-                  <th className="py-2 px-4 border">Complaints</th>
-                  <th className="py-2 px-4 border">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredAppointments.map((appointment, index) => (
-                  <React.Fragment key={index}>
-                    <tr className="hover:bg-gray-100">
-                      <td className="py-2 px-4 border">{appointment.patientName}</td>
-                      <td className="py-2 px-4 border">{appointment.patientAge}</td>
-                      <td className="py-2 px-4 border">{appointment.patientPhone}</td>
-                      <td className="py-2 px-4 border">{appointment.weight} kg</td>
-                      <td className="py-2 px-4 border">{appointment.height} cm</td>
-                      <td className="py-2 px-4 border">{appointment.BP} mmHg</td>
-                      <td className="py-2 px-4 border">{appointment.complaints}</td>
-                      <td className="py-2 px-4 border">
-                        <button
-                          onClick={() => toggleRowVisibility(index)}
-                          className="bg-blue-500 text-white py-1 px-3 rounded-lg"
-                        >
-                          {expandedRows[index] ? 'Hide' : 'Show'} Details
-                        </button>
-                      </td>
-                    </tr>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredAppointments.map((appointment, index) => (
+              <div key={index} className="bg-white rounded-lg shadow-md p-4">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-lg font-semibold">{appointment.patientName}</h3>
+                  <button
+                    onClick={() => toggleRowVisibility(index)}
+                    className="bg-blue-500 text-white py-1 px-3 rounded-lg"
+                  >
+                    {expandedRows[index] ? 'Hide' : 'Show'} Details
+                  </button>
+                </div>
+                <p><strong>Age:</strong> {appointment.patientAge}</p>
+                <p><strong>Phone:</strong> {appointment.patientPhone}</p>
+                <p><strong>Weight:</strong> {appointment.weight} kg</p>
+                <p><strong>Height:</strong> {appointment.height} cm</p>
+                <p><strong>BP:</strong> {appointment.BP} mmHg</p>
+                <p><strong>Complaints:</strong> {appointment.complaints}</p>
 
-                    {/* Expanded details row */}
-                    {expandedRows[index] && (
-                      <tr>
-                        <td colSpan="8" className="p-4">
-                          <div className="bg-gray-50 p-4 rounded-lg">
-                            <p><strong>Medical History:</strong> {appointment.history}</p>
-                            <p><strong>Doctor's Findings:</strong> {appointment.clinicalFinding}</p>
-                            <p><strong>Medicines:</strong> {appointment.medicines}</p>
-                            <p><strong>Advice:</strong> {appointment.advice}</p>
-                            <p><strong>Consulted Doctor Name:</strong> {appointment.doctorName}</p>
-                            <p><strong>Consulted Doctor Phone Number:</strong> {appointment.doctorPhone}</p>
-                          </div>
-                        </td>
-                      </tr>
-                    )}
-                  </React.Fragment>
-                ))}
-              </tbody>
-            </table>
+                {/* Expanded details */}
+                {expandedRows[index] && (
+                  <div className="mt-4 bg-gray-50 p-2 rounded-lg">
+                    <p><strong>Medical History:</strong> {appointment.history}</p>
+                    <p><strong>Doctor's Findings:</strong> {appointment.clinicalFinding}</p>
+                    <p><strong>Medicines:</strong> {appointment.medicines}</p>
+                    <p><strong>Advice:</strong> {appointment.advice}</p>
+                    <p><strong>Consulted Doctor Name:</strong> {appointment.doctorName}</p>
+                    <p><strong>Consulted Doctor Phone Number:</strong> {appointment.doctorPhone}</p>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         ) : (
           <p>No patient history found.</p>
         )}
       </div>
-      
-   
+
       {/* Toast notifications container */}
       <ToastContainer />
     </div>
