@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import LoginSignup from './components/LoginSignup';
 import Appointment from './components/Appointment';
@@ -7,14 +7,22 @@ import Ai from './components/Ai';
 import CreateAppointment from './components/CreateAppointment';
 import DoctorReview from './components/DoctorReview';
 import PatientHistory from './components/PatientHistory';
-import ProtectedRoute from './components/ProtectedRoute'; // Import ProtectedRoute
 import NavigationButtons from './components/NavigationButtons';
 
-
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);  // Authentication state
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [appointmentDetails, setAppointmentDetails] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      setIsLoggedIn(true);
+      // Optionally, fetch user details using the token here
+    }
+    setIsLoading(false);
+  }, []);
 
   const pages = [
     { name: 'Login', path: '/' },
@@ -24,10 +32,13 @@ function App() {
     { name: 'Doctor Review', path: '/review' },
     { name: 'Patient History', path: '/patienthistory' },
   ];  
-  
+
+  if (isLoading) {
+    return <div>Loading...</div>; // Or any loading indicator
+  }
+
   return (
     <Router>
-      {/* Now useLocation is inside Router */}
       <LocationAwareComponent 
         isLoggedIn={isLoggedIn} 
         setUser={setUser} 
@@ -41,65 +52,49 @@ function App() {
 }
 
 function LocationAwareComponent({ isLoggedIn, setUser, setIsLoggedIn, pages, appointmentDetails, setAppointmentDetails }) {
-  const location = useLocation(); // This is now inside Router context
+  const location = useLocation();
   
-  // Define the paths where you want to hide the navigation buttons
   const hideNavigationPaths = ['/', '/appointment'];
 
   return (
     <>
-      <Header isLoggedIn={isLoggedIn} handleLogout={() => setIsLoggedIn(false)} />
+      <Header 
+        isLoggedIn={isLoggedIn} 
+        handleLogout={() => {
+          setIsLoggedIn(false);
+          localStorage.removeItem('authToken');
+        }} 
+      />
       <Routes>
-        {/* Public Route */}
         <Route 
           path="/" 
-          element={<LoginSignup setUser={setUser} setIsLoggedIn={setIsLoggedIn} />} 
+          element={isLoggedIn ? <Navigate to="/appointment" /> : <LoginSignup setUser={setUser} setIsLoggedIn={setIsLoggedIn} />} 
         />
 
-        {/* Protected Routes */}
         <Route 
           path="/appointment" 
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <Appointment />
-            </ProtectedRoute>
-          } 
+          element={isLoggedIn ? <Appointment /> : <Navigate to="/" />} 
         />
         <Route 
           path="/ai" 
-          element={
-            
-              <Ai />
-           
-          }
+          element={isLoggedIn ? <Ai /> : <Navigate to="/" />}
         />
         <Route 
           path="/create" 
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <CreateAppointment sendToDoctor={setAppointmentDetails} />
-            </ProtectedRoute>
-          } 
+          element={isLoggedIn ? <CreateAppointment sendToDoctor={setAppointmentDetails} /> : <Navigate to="/" />} 
         />
         <Route 
           path="/review" 
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <DoctorReview appointmentDetails={appointmentDetails} />
-            </ProtectedRoute>
-          } 
+          element={isLoggedIn ? <DoctorReview appointmentDetails={appointmentDetails} /> : <Navigate to="/" />} 
         />
         <Route 
           path="/patienthistory" 
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <PatientHistory />
-            </ProtectedRoute>
-          } 
+          element={isLoggedIn ? <PatientHistory /> : <Navigate to="/" />} 
         />
+        <Route path="*" element={<Navigate to={isLoggedIn ? "/appointment" : "/"} />} />
       </Routes>
-      {/* Conditionally render Navigation Buttons based on the current path
-      {!hideNavigationPaths.includes(location.pathname) && <NavigationButtons pages={pages} />} */}
+      
+      {!hideNavigationPaths.includes(location.pathname) && <NavigationButtons pages={pages} />}
     </>
   );
 }
