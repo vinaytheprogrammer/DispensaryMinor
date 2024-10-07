@@ -37,7 +37,7 @@ const DoctorReview = ({ appointmentDetails }) => {
     };
 
     try {
-      const response = await axios.post('https://dispensaryminor-aa3dd5f90851.herokuapp.com/api/appointments', fullAppointmentDetails, {
+      const response = await axios.post('http://localhost:5000/api/appointments', fullAppointmentDetails, {
         headers: {
           'Content-Type': 'application/json',
         },

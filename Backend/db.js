@@ -4,15 +4,18 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const connectDB = async () => {
-  try {
-    await mongoose
+const connectDB = () => {
+  if(process.env.ENV==="DEV"){
+    mongoose
     .connect("mongodb://localhost:27017",{dbName: "DispensaryAnkit"})
     .then((c) => console.log(`Local Database Connected with ${c.connection.host}`))
     .catch((e) => console.log(e));
-  } catch (error) {
-    console.error('MongoDB connection failed:', error.message);
-    process.exit(1);
+  }
+  else{
+    mongoose
+    .connect(process.env.MONGO_URI)
+    .then((c) => console.log(`Global Database Connected with ${c.connection.host}`))
+    .catch((e) => console.log(e));
   }
 };
 

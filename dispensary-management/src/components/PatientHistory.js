@@ -15,7 +15,7 @@ const PatientHistory = () => {
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
-        const response = await axios.get('https://dispensaryminor-aa3dd5f90851.herokuapp.com/api/appointments');
+        const response = await axios.get('http://localhost:5000/api/appointments');
         setAppointments(response.data);
         setFilteredAppointments(response.data);
         setLoading(false);

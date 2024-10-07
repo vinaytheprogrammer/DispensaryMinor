@@ -20,7 +20,7 @@ const LoginSignup = ({ setUser, setIsLoggedIn }) => {
       : { name, email, password, role };
 
     try {
-      const response = await fetch(`https://dispensaryminor-aa3dd5f90851.herokuapp.com/api/auth${endpoint}`, {
+      const response = await fetch(`http://localhost:5000/api/auth${endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
