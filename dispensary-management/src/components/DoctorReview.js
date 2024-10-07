@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify'; // For toast notifications
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'; // Import axios
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const DoctorReview = ({ appointmentDetails }) => {
   const navigate = useNavigate();
@@ -76,6 +76,8 @@ const DoctorReview = ({ appointmentDetails }) => {
   return (
     <div className="min-h-screen flex items-center justify-center  bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl">
+      <Link to="/create" className="top-4 left-4 bg-gray-200 hover:bg-gray-300 text-black py-1 px-4 rounded-lg ">Back</Link>
+   
         <h2 className="text-3xl font-bold mb-6 text-center">Make Prescription</h2>
         
         <div className="mb-8 border-b pb-4">
