@@ -10,6 +10,7 @@ import PatientHistory from './components/PatientHistory';
 import ProtectedRoute from './components/ProtectedRoute'; // Import ProtectedRoute
 import NavigationButtons from './components/NavigationButtons';
 
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);  // Authentication state
   const [user, setUser] = useState(null);
