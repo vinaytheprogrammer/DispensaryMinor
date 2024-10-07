@@ -31,19 +31,15 @@ const MedicalForm = ({ onSubmit }) => {
   return (
     <div className="w-full sm:w-[350px] border rounded-lg overflow-hidden shadow-lg">
       <div className="px-6 py-4">
-      <Link
-  to="/appointment"
-  className=" top-4 left-4 bg-gray-200 hover:bg-gray-300 text-black py-1 px-4 rounded-lg"
->
-  Back
-</Link>
-        <div className="font-bold text-base mb-2 text-green py-3 ">Medical Assistance Form</div>
-        <div className="mb-4">
+      
+
+        <div className="font-bold text-base mb-4 text-green py-3 ">Medical Assistance Form</div>
+        <div className="mb-1">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="symptoms">
             Symptoms
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="px-4 w-full py-2 border rounded-lg"
             id="symptoms"
             type="text"
             placeholder="Enter symptoms"
@@ -51,24 +47,24 @@ const MedicalForm = ({ onSubmit }) => {
             onChange={(e) => setSymptoms(e.target.value)}
           />
         </div>
-        <div className="mb-4">
+        <div className="mb-1">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="medicalHistory">
             Medical History
           </label>
           <textarea
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="px-4 py-2 w-full border rounded-lg"
             id="medicalHistory"
             placeholder="Enter medical history"
             value={medicalHistory}
             onChange={(e) => setMedicalHistory(e.target.value)}
           />
         </div>
-        <div className="mb-4">
+        <div className="mb-1">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="currentMedications">
             Current Medications
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="px-4 py-2 border w-full rounded-lg"
             id="currentMedications"
             type="text"
             placeholder="Enter current medications"
@@ -76,12 +72,12 @@ const MedicalForm = ({ onSubmit }) => {
             onChange={(e) => setCurrentMedications(e.target.value)}
           />
         </div>
-        <div className="mb-4">
+        <div className="mb-1">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="allergies">
             Allergies
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="px-4 py-2 w-full border rounded-lg"
             id="allergies"
             type="text"
             placeholder="Enter allergies"
@@ -94,7 +90,7 @@ const MedicalForm = ({ onSubmit }) => {
             Age
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="px-4 w-full py-2 border rounded-lg"
             id="age"
             type="number"
             placeholder="Enter age"
@@ -107,7 +103,7 @@ const MedicalForm = ({ onSubmit }) => {
             Gender
           </label>
           <select
-            className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+            className="px-4 w-full py-2 border rounded-lg"
             id="gender"
             value={gender}
             onChange={(e) => setGender(e.target.value)}
@@ -122,7 +118,7 @@ const MedicalForm = ({ onSubmit }) => {
             Enquiry about Medicines
           </label>
           <textarea
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="px-4 py-2 border w-full rounded-lg"
             id="medicineEnquiry"
             placeholder="Enter any enquiries about medicines"
             value={medicineEnquiry}
@@ -131,7 +127,7 @@ const MedicalForm = ({ onSubmit }) => {
         </div>
         <div className="px-6 py-4">
           <button
-            className="bg-green font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-green-600 px-4 w-full py-2 rounded hover:bg-green-700 transition duration-100"
             type="button"
             onClick={handleSubmit}
           >
@@ -232,8 +228,8 @@ function GeneratedText({ text }) {
   
     return (
       <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-        <div className="mx-auto mb-10 lg:max-w-xl sm:text-center">
-       
+        
+      <div className="mx-auto mb-10 lg:max-w-xl sm:text-center">
           <p className="inline-block px-3 md:text-xl py-px mb-4 text-xs font-semibold tracking-wider text-[#274187] uppercase rounded-full bg-teal-accent-400">
             Discover Our Dispensary Artificial intelligence
           </p>
