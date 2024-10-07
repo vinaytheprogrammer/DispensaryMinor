@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';  // Ensure this is imported
+import 'react-toastify/dist/ReactToastify.css';
+import './CreateAppointment.css'; // Ensure this CSS file exists
 
 const CreateAppointment = ({ sendToDoctor }) => {
   const [patientDetails, setPatientDetails] = useState({
@@ -16,7 +17,7 @@ const CreateAppointment = ({ sendToDoctor }) => {
     complaints: '',
     history: '',
   });
-  const navigate = useNavigate(); // to navigate to review page
+  const navigate = useNavigate(); // for navigation
 
   const handleChange = (e) => {
     setPatientDetails({ ...patientDetails, [e.target.name]: e.target.value });
@@ -25,36 +26,38 @@ const CreateAppointment = ({ sendToDoctor }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     toast.success(`Appointment created successfully!`);
-    sendToDoctor(patientDetails); // pass patient details to DoctorReview
-    
+    sendToDoctor(patientDetails); // pass details to DoctorReview
+
     setTimeout(() => {
       navigate('/review');
-    }, 800); // Slight delay to allow toast to show
+    }, 800); // Delay for toast display
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg w-full max-w-3xl">
-        <h2 className="text-2xl font-bold mb-6 text-center">New Appointment</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="create-appointment-container">
+      <form onSubmit={handleSubmit} className="create-appointment-form">
+        <Link to="/appointment" className="create-appointment-back-button">
+          Back
+        </Link>
+        <h2 className="create-appointment-title">New Appointment</h2>
+        <div className="create-appointment-grid">
           {/* Patient Basic Details */}
-          <input name="name" placeholder="Name" value={patientDetails.name} onChange={handleChange} className="px-4 py-2 border rounded-lg" required />
-          <input name="age" placeholder="Age" value={patientDetails.age} onChange={handleChange} className="px-4 py-2 border rounded-lg" required />
-          <input name="phone" placeholder="Phone" value={patientDetails.phone} onChange={handleChange} className="px-4 py-2 border rounded-lg" required />
+          <input name="name" placeholder="Name" value={patientDetails.name} onChange={handleChange} className="create-appointment-input" required />
+          <input name="age" placeholder="Age" value={patientDetails.age} onChange={handleChange} className="create-appointment-input" required />
+          <input name="phone" placeholder="Phone" value={patientDetails.phone} onChange={handleChange} className="create-appointment-input" required />
           {/* Vitals */}
-          <input name="weight" placeholder="Weight" value={patientDetails.weight} onChange={handleChange} className="px-4 py-2 border rounded-lg" required />
-          <input name="height" placeholder="Height" value={patientDetails.height} onChange={handleChange} className="px-4 py-2 border rounded-lg" required />
-          <input name="BP" placeholder="Blood Pressure" value={patientDetails.BP} onChange={handleChange} className="px-4 py-2 border rounded-lg" required />
-          <input name="BG" placeholder="Blood Glucose" value={patientDetails.BG} onChange={handleChange} className="px-4 py-2 border rounded-lg" required />
-          <input name="SPO2" placeholder="SPO2" value={patientDetails.SPO2} onChange={handleChange} className="px-4 py-2 border rounded-lg" required />
+          <input name="weight" placeholder="Weight" value={patientDetails.weight} onChange={handleChange} className="create-appointment-input" required />
+          <input name="height" placeholder="Height" value={patientDetails.height} onChange={handleChange} className="create-appointment-input" required />
+          <input name="BP" placeholder="Blood Pressure" value={patientDetails.BP} onChange={handleChange} className="create-appointment-input" required />
+          <input name="BG" placeholder="Blood Glucose" value={patientDetails.BG} onChange={handleChange} className="create-appointment-input" required />
+          <input name="SPO2" placeholder="SPO2" value={patientDetails.SPO2} onChange={handleChange} className="create-appointment-input" required />
         </div>
         {/* Complaints & History */}
-        <textarea name="complaints" placeholder="Chief Complaints" value={patientDetails.complaints} onChange={handleChange} className="w-full mt-4 px-4 py-2 border rounded-lg"></textarea>
-        <textarea name="history" placeholder="Medical History" value={patientDetails.history} onChange={handleChange} className="w-full mt-4 px-4 py-2 border rounded-lg"></textarea>
-        <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition duration-200 mt-6">Send to Doctor</button>
+        <textarea name="complaints" placeholder="Chief Complaints" value={patientDetails.complaints} onChange={handleChange} className="create-appointment-textarea" />
+        <textarea name="history" placeholder="Medical History" value={patientDetails.history} onChange={handleChange} className="create-appointment-textarea" />
+        <button type="submit" className="create-appointment-submit">Send to Doctor</button>
       </form>
 
-      {/* Add the ToastContainer here */}
       <ToastContainer />
     </div>
   );
