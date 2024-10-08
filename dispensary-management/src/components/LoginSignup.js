@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +10,17 @@ const LoginSignup = ({ setUser, setIsLoggedIn }) => {
   const [role, setRole] = useState('doctor');
   const [isLogin, setIsLogin] = useState(true);
   const navigate = useNavigate();
+
+  // Automatically log in the user if a token is found in localStorage
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      // Optionally, you can decode the token and set the user info
+      setIsLoggedIn(true);
+      // You can also fetch the user data using the token if needed
+      navigate('/appointment');
+    }
+  }, [navigate, setIsLoggedIn]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,9 +40,16 @@ const LoginSignup = ({ setUser, setIsLoggedIn }) => {
       const data = await response.json();
 
       if (response.ok) {
+        // Save the token in localStorage
+        localStorage.setItem('authToken', data.token); // Assuming the token is in `data.token`
+        
+        // Set the user and logged-in status
         setUser(data.user);
         setIsLoggedIn(true);
+        
         toast.success(`${isLogin ? 'Login' : 'Registration'} successful!`);
+        
+        // Navigate to the appointment page after login/register
         setTimeout(() => {
           navigate('/appointment');
         }, 500); // 500ms delay
