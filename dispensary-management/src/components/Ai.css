@@ -1,0 +1,255 @@
+/* Professional appearance with consistent design elements */
+body {
+    font-family: "Arial", sans-serif;
+    background-color: #f0f2f5;
+}
+
+.ai-container {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.ai-content {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.badge {
+    font-size: 24px;
+    font-weight: bold;
+    color: #274187;
+}
+
+.description {
+    font-size: 16px;
+    color: #666;
+}
+
+.form-wrapper {
+    margin-top: 20px;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+    .tab-button {
+        padding: 12px 20px;
+        border: none;
+        border-radius: 5px;
+        background: #e0e0e0;
+        cursor: pointer;
+        flex: 1;
+        margin-right: 10px;
+        transition: background 0.3s;
+        font-weight: bold;
+    }
+
+    .tab-button:last-child {
+        margin-right: 0;
+    }
+
+    .tab-button.active {
+        background: #274187;
+        color: white;
+    }
+
+    .form-content {
+        padding: 20px;
+        background: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card {
+        margin-bottom: 20px;
+        padding: 20px;
+        border-radius: 8px;
+        background: #ffffff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    .submit-button {
+        padding: 12px 20px;
+        background-color: #274187;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .submit-button:hover {
+        background-color: #1e3a7a;
+    }
+
+    .loading-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+.loading-text {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #666;
+}
+
+.generated-output {
+    margin-top: 20px;
+}
+
+.generated-heading {
+    font-size: 20px;
+    font-weight: bold;
+    color: #274187;
+}
+
+.generated-paragraph {
+    font-size: 16px;
+    color: #333;
+    margin: 10px 0;
+}
+/* Professional appearance with consistent design elements */
+body {
+    font-family: "Arial", sans-serif;
+    background-color: #f0f2f5;
+}
+
+.ai-container {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.ai-content {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-wrapper {
+    margin-top: 20px;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #e0e0e0;
+    cursor: pointer;
+    flex: 1;
+    margin-right: 10px;
+    transition: background 0.3s;
+    font-weight: bold;
+}
+
+.tab-button:last-child {
+    margin-right: 0;
+}
+
+.tab-button.active {
+    background: #274187;
+    color: white;
+}
+
+.form-content {
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.submit-button {
+    padding: 12px 20px;
+    background-color: #274187;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: block;
+    margin: 20px auto; /* Center the button */
+}
+
+.submit-button:hover {
+    background-color: #1e3a7a;
+}
+
+.diagnostics, .medications, .lifestyle-adjustments, .follow-up, .additional-advice {
+    margin-top: 30px;
+}
+
+h2 {
+    color: #274187;
+}
+
+ul {
+    list-style-type: none; /* Remove default list styling */
+    padding-left: 0; /* Remove default padding */
+}
+
+li {
+    margin: 10px 0; /* Add spacing between list items */
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .ai-content {
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+
+    .tab-button {
+        font-size: 14px; /* Reduce button font size */
+    }
+
+    .submit-button {
+        width: 100%; /* Make the submit button full-width on mobile */
+    }
+}
