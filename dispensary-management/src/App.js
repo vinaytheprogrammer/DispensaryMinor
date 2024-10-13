@@ -8,6 +8,7 @@ import CreateAppointment from './components/CreateAppointment';
 import DoctorReview from './components/DoctorReview';
 import PatientHistory from './components/PatientHistory';
 import NavigationButtons from './components/NavigationButtons';
+import PreviewSlip from './components/PreviewSlip';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -85,7 +86,11 @@ function LocationAwareComponent({ isLoggedIn, setUser, setIsLoggedIn, pages, app
         />
         <Route 
           path="/review" 
-          element={isLoggedIn ? <DoctorReview appointmentDetails={appointmentDetails} /> : <Navigate to="/" />} 
+          element={isLoggedIn ? <DoctorReview appointmentDetails={appointmentDetails} sendToDoctor={setAppointmentDetails} /> : <Navigate to="/" />} 
+        />
+        <Route 
+          path="/preview-slip" 
+          element={isLoggedIn ? <PreviewSlip appointmentDetails={appointmentDetails} /> : <Navigate to="/" />} 
         />
         <Route 
           path="/patienthistory" 
