@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'; // Import axios
 import { Link, useNavigate } from 'react-router-dom';
 
-const DoctorReview = ({ appointmentDetails }) => {
+const DoctorReview = ({ appointmentDetails, sendToDoctor }) => {
   const navigate = useNavigate();
   const [doctorDetails, setDoctorDetails] = useState({
     clinicalFinding: '',
@@ -57,8 +57,9 @@ const DoctorReview = ({ appointmentDetails }) => {
         position: "top-right",
       });
     }
+    sendToDoctor(fullAppointmentDetails); // pass patient details to Preview Slip
     setTimeout(() => {
-      navigate('/appointment');
+      navigate('/preview-slip');
     }, 700); // 700ms delay
   };
 
