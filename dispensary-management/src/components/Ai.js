@@ -4,7 +4,8 @@ import { ClipLoader } from "react-spinners";
 import { motion } from "framer-motion";
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { Link } from "react-router-dom";
-const genAI = new GoogleGenerativeAI("AIzaSyCqUDLB0RfdYAHfW3j-FZowH1vEY5hLm7o");
+const apiKey = process.env.REACT_APP_GOOGLE_API_KEY || "";
+const genAI = new GoogleGenerativeAI(apiKey);
 
 const MedicalForm = ({ onSubmit }) => {
   const [symptoms, setSymptoms] = useState("");
